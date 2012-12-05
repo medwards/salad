@@ -6,7 +6,7 @@ from salad.logger import logger
 @before.all
 def setup_master_browser():
     try:
-        browser = world.drivers[0]
+        browser = world.driver
         remote_url = world.remote_url
     except AttributeError, IndexError:
         browser = 'firefox'
