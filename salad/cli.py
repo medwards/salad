@@ -1,11 +1,11 @@
 import sys
 import argparse
 
-from lettuce.bin import main as lettuce_main
-from lettuce import world
+from behave.__main__ import main as behave_main
+#from lettuce import world
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
-from salad.steps.everything import *
-from salad.terrains.everything import *
+#from salad.steps.everything import *
+#from salad.terrains.everything import *
 
 BROWSER_CHOICES = [browser.lower()
                    for browser in DesiredCapabilities.__dict__.keys()
@@ -40,7 +40,7 @@ def main(args=sys.argv[1:]):
     parser.add_argument('--remote-url',
                         help='Selenium server url for remote browsers')
 
-    (parsed_args, leftovers) = parser.parse_known_args()
+    (parsed_args, leftovers) = parser.parse_known_args(args)
     world.drivers = [parsed_args.browser]
     world.remote_url = parsed_args.remote_url
     world.remote_capabilities = {}
@@ -48,7 +48,7 @@ def main(args=sys.argv[1:]):
         world.remote_capabilities['version'] = parsed_args.version
     if 'platform' in parsed_args:
         world.remote_capabilities['platform'] = parsed_args.platform
-    lettuce_main(args=leftovers)
+    behave_main(args=leftovers)
 
 if __name__ == '__main__':
     main()
