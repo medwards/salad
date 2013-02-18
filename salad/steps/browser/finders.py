@@ -21,6 +21,7 @@ LINK_FINDERS = {
 
 ELEMENT_THING_STRING = "(?:element|thing|field|textarea|radio button|button|checkbox|label)"
 LINK_THING_STRING = "link"
+PICK_EXPRESSION = "( first| last| \d+..)?"
 
 VISIBILITY_TIMEOUT = 1
 
