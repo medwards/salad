@@ -3,7 +3,6 @@ from splinter.browser import Browser
 from salad.logger import logger
 
 
-@before.all
 def setup_master_browser():
     try:
         browser = world.drivers[0]
@@ -34,7 +33,7 @@ def setup_browser(browser, url=None, **capabilities):
 
 @before.each_scenario
 def clear_alternative_browsers(step):
-    world.browser = world.master_browser
+    setup_master_browser()
     world.browsers = []
 
 
@@ -48,11 +47,8 @@ def reset_to_parent_frame(step):
 def restore_browser(step):
     for browser in world.browsers:
         teardown_browser(browser)
-
-
-@after.all
-def teardown_master_browser(total):
     teardown_browser(world.master_browser)
+
 
 def teardown_browser(browser):
     name = browser.driver_name
